@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style type="text/css">
+	/*body {
+		background-color: black;
+	}*/
+	#container {
+		width: 100%;
+		text-align: center;
+	}
+	canvas {
+		border: 1px solid black;
+		margin-top: 2%;
+		display: inline;
+		height: 50vh;
+	}
+</style>
+</head>
+<body>
+
+<audio src="./tones/c0.wav" id="C0"></audio>
+<audio src="./tones/d0.wav" id="D0"></audio>
+<audio src="./tones/e0.wav" id="E0"></audio>
+<audio src="./tones/f0.wav" id="F0"></audio>
+<audio src="./tones/g0.wav" id="G0"></audio>
+<audio src="./tones/a0.wav" id="A0"></audio>
+<audio src="./tones/b0.wav" id="B0"></audio>
+
+<audio src="./tones/c1.wav" id="C1"></audio>
+<audio src="./tones/d1.wav" id="D1"></audio>
+<audio src="./tones/e1.wav" id="E1"></audio>
+<audio src="./tones/f1.wav" id="F1"></audio>
+<audio src="./tones/g1.wav" id="G1"></audio>
+<audio src="./tones/a1.wav" id="A1"></audio>
+<audio src="./tones/b1.wav" id="B1"></audio>
+
+<audio src="./tones/c2.wav" id="C2"></audio>
+<audio src="./tones/d2.wav" id="D2"></audio>
+<audio src="./tones/e2.wav" id="E2"></audio>
+<audio src="./tones/f2.wav" id="F2"></audio>
+<audio src="./tones/g2.wav" id="G2"></audio>
+<audio src="./tones/a2.wav" id="A2"></audio>
+<audio src="./tones/b2.wav" id="B2"></audio>
+
+<audio src="./tones/c3.wav" id="C3"></audio>
+<audio src="./tones/d3.wav" id="D3"></audio>
+<audio src="./tones/e3.wav" id="E3"></audio>
+<audio src="./tones/f3.wav" id="F3"></audio>
+<audio src="./tones/g3.wav" id="G3"></audio>
+<audio src="./tones/a3.wav" id="A3"></audio>
+<audio src="./tones/b3.wav" id="B3"></audio>
+
+<audio src="./tones/c4.wav" id="C4"></audio>
+<audio src="./tones/d4.wav" id="D4"></audio>
+<audio src="./tones/e4.wav" id="E4"></audio>
+<audio src="./tones/f4.wav" id="F4"></audio>
+<audio src="./tones/g4.wav" id="G4"></audio>
+<audio src="./tones/a4.wav" id="A4"></audio>
+<audio src="./tones/b4.wav" id="B4"></audio>
+
+<audio src="./tones/c5.wav" id="C5"></audio>
+<audio src="./tones/d5.wav" id="D5"></audio>
+<audio src="./tones/e5.wav" id="E5"></audio>
+<audio src="./tones/f5.wav" id="F5"></audio>
+<audio src="./tones/g5.wav" id="G5"></audio>
+<audio src="./tones/a5.wav" id="A5"></audio>
+<audio src="./tones/b5.wav" id="B5"></audio>
+
+<audio src="./tones/c6.wav" id="C6"></audio>
+<audio src="./tones/d6.wav" id="D6"></audio>
+<audio src="./tones/e6.wav" id="E6"></audio>
+<audio src="./tones/f6.wav" id="F6"></audio>
+<audio src="./tones/g6.wav" id="G6"></audio>
+<audio src="./tones/a6.wav" id="A6"></audio>
+<audio src="./tones/b6.wav" id="B6"></audio>
+
+<audio src="./tones/c7.wav" id="C7"></audio>
+<audio src="./tones/d7.wav" id="D7"></audio>
+<audio src="./tones/e7.wav" id="E7"></audio>
+<audio src="./tones/f7.wav" id="F7"></audio>
+<audio src="./tones/g7.wav" id="G7"></audio>
+<audio src="./tones/a7.wav" id="A7"></audio>
+<audio src="./tones/b7.wav" id="B7"></audio>
+
+<audio src="./tones/c8.wav" id="C8"></audio>
+<!-- <audio src="./tones/d8.wav" id="D8"></audio>
+<audio src="./tones/e8.wav" id="E8"></audio>
+<audio src="./tones/f8.wav" id="F8"></audio>  these are way too high
+<audio src="./tones/g8.wav" id="G8"></audio>
+<audio src="./tones/a8.wav" id="A8"></audio>
+<audio src="./tones/b8.wav" id="B8"></audio>
+
+<audio src="./tones/c9.wav" id="C9"></audio> -->
+
+
+<div id="container">
+	<h1>SINGING GLIDER</h1>
+	<canvas id="life"></canvas>
+</div>
+
+</body>
+<script src="./gameoflife.js"></script>
+<script type="text/javascript">
+
+	function getElement (note) {
+		return document.getElementById(note)
+	}
+
+	const C0 = getElement('C0')
+	const D0 = getElement('D0')
+	const E0 = getElement('E0')
+	const F0 = getElement('F0')
+	const G0 = getElement('G0')
+	const A0 = getElement('A0')
+	const B0 = getElement('B0')
+	const C1 = getElement('C1')
+	const D1 = getElement('D1')
+	const E1 = getElement('E1')
+	const F1 = getElement('F1')
+	const G1 = getElement('G1')
+	const A1 = getElement('A1')
+	const B1 = getElement('B1')
+	const C2 = getElement('C2')
+	const D2 = getElement('D2')
+	const E2 = getElement('E2')
+	const F2 = getElement('F2')
+	const G2 = getElement('G2')
+	const A2 = getElement('A2')
+	const B2 = getElement('B2')
+	const C3 = getElement('C3')
+	const D3 = getElement('D3')
+	const E3 = getElement('E3')
+	const F3 = getElement('F3')
+	const G3 = getElement('G3')
+	const A3 = getElement('A3')
+	const B3 = getElement('B3')
+	const C4 = getElement('C4')
+	const D4 = getElement('D4')
+	const E4 = getElement('E4')
+	const F4 = getElement('F4')
+	const G4 = getElement('G4')
+	const A4 = getElement('A4')
+	const B4 = getElement('B4')
+	const C5 = getElement('C5')
+	const D5 = getElement('D5')
+	const E5 = getElement('E5')
+	const F5 = getElement('F5')
+	const G5 = getElement('G5')
+	const A5 = getElement('A5')
+	const B5 = getElement('B5')
+	const C6 = getElement('C6')
+	const D6 = getElement('D6')
+	const E6 = getElement('E6')
+	const F6 = getElement('F6')
+	const G6 = getElement('G6')
+	const A6 = getElement('A6')
+	const B6 = getElement('B6')
+	const C7 = getElement('C7')
+	const D7 = getElement('D7')
+	const E7 = getElement('E7')
+	const F7 = getElement('F7')
+	const G7 = getElement('G7')
+	const A7 = getElement('A7')
+	const B7 = getElement('B7')
+	const C8 = getElement('C8')
+	// const D8 = getElement('D8')
+	// const E8 = getElement('E8')
+	// const F8 = getElement('F8')
+	// const G8 = getElement('G8')
+	// const A8 = getElement('A8')
+	// const B8 = getElement('B8')
+	// const C9 = getElement('C9')
+	
+	var starting_cells = [
+		[0,1,0,0,0,0,0,0],
+		[0,0,1,0,0,0,0,0],
+		[1,1,1,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,1,0],
+		[0,0,0,0,0,0,0,1],
+		[0,0,0,0,0,1,1,1],
+		[0,0,0,0,0,0,0,0]
+	];
+
+	// detect when live cells land on each pad of this matrix
+	//    1 2 3 4 5 6 7 8
+	// 1  C G D A E B F C
+	// 2  E B F C G D A E 
+	// 3  G D A E B F C G
+	// 4  B F C G D A E B
+	// 5  D A E B F C G D
+	// 6  F C G D A E B F
+	// 7  A E B F C G D A
+	// 8  C G D A E B F C
+
+	function playTone (el) {
+		el.currentTime = 0;
+		el.play()
+	}
+
+	var matrix = [
+		[() => playTone(C0), () => playTone(G0),
+		 () => playTone(D0), () => playTone(A0),
+		 () => playTone(E0), () => playTone(B0),
+		 () => playTone(F0), () => playTone(C1)],
+
+		[() => playTone(E1), () => playTone(B1),
+		 () => playTone(F1), () => playTone(C1),
+		 () => playTone(G1), () => playTone(D1),
+		 () => playTone(A1), () => playTone(E2)],
+
+		[() => playTone(G2), () => playTone(D2),
+		 () => playTone(A2), () => playTone(E2),
+		 () => playTone(B2), () => playTone(F2),
+		 () => playTone(C2), () => playTone(G3)],
+
+		[() => playTone(B3), () => playTone(F3),
+		 () => playTone(C3), () => playTone(G3),
+		 () => playTone(D3), () => playTone(A3),
+		 () => playTone(E3), () => playTone(B4)],
+
+		[() => playTone(D4), () => playTone(A4),
+		 () => playTone(E4), () => playTone(B4),
+		 () => playTone(F4), () => playTone(C4),
+		 () => playTone(G4), () => playTone(D5)],
+
+		[() => playTone(F5), () => playTone(C5),
+		 () => playTone(G5), () => playTone(D5),
+		 () => playTone(A5), () => playTone(E5),
+		 () => playTone(B5), () => playTone(F6)],
+
+		[() => playTone(A6), () => playTone(E6),
+		 () => playTone(B6), () => playTone(F6),
+		 () => playTone(C6), () => playTone(G6),
+		 () => playTone(D6), () => playTone(A7)],
+
+		[() => playTone(C7), () => playTone(G7),
+		 () => playTone(D7), () => playTone(A7),
+		 () => playTone(E7), () => playTone(B7),
+		 () => playTone(F7), () => playTone(C8)]
+	]
+
+	var params = {
+      canvas_id:    'life',
+      cell_width:   10,
+      cell_height:  10,
+	  colorful: true,
+      init_cells:   starting_cells
+    };
+
+    var game = new GameOfLife(params);
+
+    function play () {
+    	game.getCurrentGenCells().forEach((row, y) => {
+    		row.forEach((cell,x) => {
+    			if (cell.state == 'alive') {
+    				matrix[y][x]()
+    			}
+    		})
+    	})
+    }
+
+    function interval () {
+    	game.step()
+    	play()
+    }
+
+    var interval = setInterval(interval, 750);
+
+</script>
+</html>
