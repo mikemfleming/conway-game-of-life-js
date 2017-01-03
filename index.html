@@ -174,19 +174,27 @@
 	// const C9 = getElement('C9')
 	
 	var starting_cells = [
-		[0,1,0,0,0,0,0,0],
-		[0,0,1,0,0,0,0,0],
-		[1,1,1,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,1,0],
-		[0,0,0,0,0,0,0,1],
-		[0,0,0,0,0,1,1,1],
-		[0,0,0,0,0,0,0,0]
+		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[1,1,1,0,0,0,1,1,1,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],
+		[0,1,0,0,0,0,1,1,1,0,0,1,1,1,0,0],
+		[0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0],
+		[1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0],
+		[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,1,0,1,0,0,0,0,0,0,0,1,1,1,0,0],
+		[0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0],
 	];
 
 	// detect when live cells land on each pad of this matrix
 	//    1 2 3 4 5 6 7 8
-	// 1  C G D A E B F C
+	// 1  C G D A E B F C 
 	// 2  E B F C G D A E 
 	// 3  G D A E B F C G
 	// 4  B F C G D A E B
@@ -204,9 +212,17 @@
 		[() => playTone(C0), () => playTone(G0),
 		 () => playTone(D0), () => playTone(A0),
 		 () => playTone(E0), () => playTone(B0),
+		 () => playTone(F0), () => playTone(C1),
+		 () => playTone(C0), () => playTone(G0),
+		 () => playTone(D0), () => playTone(A0),
+		 () => playTone(E0), () => playTone(B0),
 		 () => playTone(F0), () => playTone(C1)],
 
 		[() => playTone(E1), () => playTone(B1),
+		 () => playTone(F1), () => playTone(C1),
+		 () => playTone(G1), () => playTone(D1),
+		 () => playTone(A1), () => playTone(E2),
+		 () => playTone(E1), () => playTone(B1),
 		 () => playTone(F1), () => playTone(C1),
 		 () => playTone(G1), () => playTone(D1),
 		 () => playTone(A1), () => playTone(E2)],
@@ -214,9 +230,17 @@
 		[() => playTone(G2), () => playTone(D2),
 		 () => playTone(A2), () => playTone(E2),
 		 () => playTone(B2), () => playTone(F2),
+		 () => playTone(C2), () => playTone(G3),
+		 () => playTone(G2), () => playTone(D2),
+		 () => playTone(A2), () => playTone(E2),
+		 () => playTone(B2), () => playTone(F2),
 		 () => playTone(C2), () => playTone(G3)],
 
 		[() => playTone(B3), () => playTone(F3),
+		 () => playTone(C3), () => playTone(G3),
+		 () => playTone(D3), () => playTone(A3),
+		 () => playTone(E3), () => playTone(B4),
+		 () => playTone(B3), () => playTone(F3),
 		 () => playTone(C3), () => playTone(G3),
 		 () => playTone(D3), () => playTone(A3),
 		 () => playTone(E3), () => playTone(B4)],
@@ -224,9 +248,17 @@
 		[() => playTone(D4), () => playTone(A4),
 		 () => playTone(E4), () => playTone(B4),
 		 () => playTone(F4), () => playTone(C4),
+		 () => playTone(G4), () => playTone(D5),
+		 () => playTone(D4), () => playTone(A4),
+		 () => playTone(E4), () => playTone(B4),
+		 () => playTone(F4), () => playTone(C4),
 		 () => playTone(G4), () => playTone(D5)],
 
 		[() => playTone(F5), () => playTone(C5),
+		 () => playTone(G5), () => playTone(D5),
+		 () => playTone(A5), () => playTone(E5),
+		 () => playTone(B5), () => playTone(F6),
+		 () => playTone(F5), () => playTone(C5),
 		 () => playTone(G5), () => playTone(D5),
 		 () => playTone(A5), () => playTone(E5),
 		 () => playTone(B5), () => playTone(F6)],
@@ -234,12 +266,92 @@
 		[() => playTone(A6), () => playTone(E6),
 		 () => playTone(B6), () => playTone(F6),
 		 () => playTone(C6), () => playTone(G6),
+		 () => playTone(D6), () => playTone(A7),
+		 () => playTone(A6), () => playTone(E6),
+		 () => playTone(B6), () => playTone(F6),
+		 () => playTone(C6), () => playTone(G6),
 		 () => playTone(D6), () => playTone(A7)],
 
 		[() => playTone(C7), () => playTone(G7),
 		 () => playTone(D7), () => playTone(A7),
 		 () => playTone(E7), () => playTone(B7),
-		 () => playTone(F7), () => playTone(C8)]
+		 () => playTone(F7), () => playTone(C8),
+		 () => playTone(C7), () => playTone(G7),
+		 () => playTone(D7), () => playTone(A7),
+		 () => playTone(E7), () => playTone(B7),
+		 () => playTone(F7), () => playTone(C8)],
+
+		 [() => playTone(C0), () => playTone(G0),
+		  () => playTone(D0), () => playTone(A0),
+		  () => playTone(E0), () => playTone(B0),
+		  () => playTone(F0), () => playTone(C1),
+		  () => playTone(C0), () => playTone(G0),
+		  () => playTone(D0), () => playTone(A0),
+		  () => playTone(E0), () => playTone(B0),
+		  () => playTone(F0), () => playTone(C1)],
+
+		 [() => playTone(E1), () => playTone(B1),
+		  () => playTone(F1), () => playTone(C1),
+		  () => playTone(G1), () => playTone(D1),
+		  () => playTone(A1), () => playTone(E2),
+		  () => playTone(E1), () => playTone(B1),
+		  () => playTone(F1), () => playTone(C1),
+		  () => playTone(G1), () => playTone(D1),
+		  () => playTone(A1), () => playTone(E2)],
+
+		 [() => playTone(G2), () => playTone(D2),
+		  () => playTone(A2), () => playTone(E2),
+		  () => playTone(B2), () => playTone(F2),
+		  () => playTone(C2), () => playTone(G3),
+		  () => playTone(G2), () => playTone(D2),
+		  () => playTone(A2), () => playTone(E2),
+		  () => playTone(B2), () => playTone(F2),
+		  () => playTone(C2), () => playTone(G3)],
+
+		 [() => playTone(B3), () => playTone(F3),
+		  () => playTone(C3), () => playTone(G3),
+		  () => playTone(D3), () => playTone(A3),
+		  () => playTone(E3), () => playTone(B4),
+		  () => playTone(B3), () => playTone(F3),
+		  () => playTone(C3), () => playTone(G3),
+		  () => playTone(D3), () => playTone(A3),
+		  () => playTone(E3), () => playTone(B4)],
+
+		 [() => playTone(D4), () => playTone(A4),
+		  () => playTone(E4), () => playTone(B4),
+		  () => playTone(F4), () => playTone(C4),
+		  () => playTone(G4), () => playTone(D5),
+		  () => playTone(D4), () => playTone(A4),
+		  () => playTone(E4), () => playTone(B4),
+		  () => playTone(F4), () => playTone(C4),
+		  () => playTone(G4), () => playTone(D5)],
+
+		 [() => playTone(F5), () => playTone(C5),
+		  () => playTone(G5), () => playTone(D5),
+		  () => playTone(A5), () => playTone(E5),
+		  () => playTone(B5), () => playTone(F6),
+		  () => playTone(F5), () => playTone(C5),
+		  () => playTone(G5), () => playTone(D5),
+		  () => playTone(A5), () => playTone(E5),
+		  () => playTone(B5), () => playTone(F6)],
+
+		 [() => playTone(A6), () => playTone(E6),
+		  () => playTone(B6), () => playTone(F6),
+		  () => playTone(C6), () => playTone(G6),
+		  () => playTone(D6), () => playTone(A7),
+		  () => playTone(A6), () => playTone(E6),
+		  () => playTone(B6), () => playTone(F6),
+		  () => playTone(C6), () => playTone(G6),
+		  () => playTone(D6), () => playTone(A7)],
+
+		 [() => playTone(C7), () => playTone(G7),
+		  () => playTone(D7), () => playTone(A7),
+		  () => playTone(E7), () => playTone(B7),
+		  () => playTone(F7), () => playTone(C8),
+		  () => playTone(C7), () => playTone(G7),
+		  () => playTone(D7), () => playTone(A7),
+		  () => playTone(E7), () => playTone(B7),
+		  () => playTone(F7), () => playTone(C8)]
 	]
 
 	var params = {
@@ -267,7 +379,7 @@
     	play()
     }
 
-    var interval = setInterval(interval, 750);
+    var interval = setInterval(interval, 500);
 
 </script>
 </html>
