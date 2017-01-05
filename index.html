@@ -124,6 +124,8 @@
 	];
 
 	// detect when live cells land on each pad of this matrix
+	//
+	// v1 - lots of expression but slightly too much dissonance
 	//    1 2 3 4 5 6 7 8
 	// 1  C G D A E B F C
 	// 2  E B F C G D A E 
@@ -133,6 +135,17 @@
 	// 6  F C G D A E B F
 	// 7  A E B F C G D A
 	// 8  C G D A E B F C
+	//
+	// v2 - no expression no dissonance
+	//    1 2 3 4 5 6 7 8
+	// 1  C G C G C G C G
+	// 2  E C E C E C E C 
+	// 3  C G C G C G C G
+	// 4  E C E C E C E C
+	// 5  C G C C G C G C
+	// 6  E C E C E C E C
+	// 7  C G C G C G C G
+	// 8  E C E C E C E C
 
 	function playTone (el) {
 		el.currentTime = 0;
@@ -140,22 +153,22 @@
 	}
 
 	var matrix = [
-		[() => playTone(C1), () => playTone(G),  () => playTone(D),  () => playTone(A),
-		 () => playTone(E),  () => playTone(B),  () => playTone(F),  () => playTone(C2)],
-		[() => playTone(E),  () => playTone(B),  () => playTone(F),  () => playTone(C1),
-		 () => playTone(G),  () => playTone(D),  () => playTone(A),  () => playTone(E)],
-		[() => playTone(G),  () => playTone(D),  () => playTone(A),  () => playTone(E),
-		 () => playTone(B),  () => playTone(F),  () => playTone(C2), () => playTone(G)],
-		[() => playTone(B),  () => playTone(F),  () => playTone(C1), () => playTone(G),
-		 () => playTone(D),  () => playTone(A),  () => playTone(E),  () => playTone(B)],
-		[() => playTone(D),  () => playTone(A),  () => playTone(E),  () => playTone(B),
-		 () => playTone(F),  () => playTone(C2), () => playTone(G),  () => playTone(D)],
-		[() => playTone(F),  () => playTone(C1), () => playTone(G),  () => playTone(D),
-		 () => playTone(A),  () => playTone(E),  () => playTone(B),  () => playTone(F)],
-		[() => playTone(A),  () => playTone(E),  () => playTone(B),  () => playTone(F),
-		 () => playTone(C2), () => playTone(G),  () => playTone(D),  () => playTone(A)],
-		[() => playTone(C1), () => playTone(G),  () => playTone(D),  () => playTone(A),
-		 () => playTone(E),  () => playTone(B),  () => playTone(F),  () => playTone(C2)]
+		[() => playTone(C3), () => playTone(G4),  () => playTone(C5),  () => playTone(G6),
+		 () => playTone(C3), () => playTone(G4),  () => playTone(C5),  () => playTone(G6)],
+		[() => playTone(E3),  () => playTone(C4),  () => playTone(E5),  () => playTone(C6),
+		 () => playTone(E3),  () => playTone(C4),  () => playTone(E5),  () => playTone(C6)],
+		[() => playTone(C3), () => playTone(G4),  () => playTone(C5),  () => playTone(G6),
+		 () => playTone(C3), () => playTone(G4),  () => playTone(C5),  () => playTone(G6)],
+		[() => playTone(E3),  () => playTone(C4),  () => playTone(E5),  () => playTone(C6),
+		 () => playTone(E3),  () => playTone(C4),  () => playTone(E5),  () => playTone(C6)],
+		[() => playTone(C3), () => playTone(G4),  () => playTone(C5),  () => playTone(G6),
+		 () => playTone(C3), () => playTone(G4),  () => playTone(C5),  () => playTone(G6)],
+		[() => playTone(E3),  () => playTone(C4),  () => playTone(E5),  () => playTone(C6),
+		 () => playTone(E3),  () => playTone(C4),  () => playTone(E5),  () => playTone(C6)],
+		[() => playTone(C3), () => playTone(G4),  () => playTone(C5),  () => playTone(G6),
+		 () => playTone(C3), () => playTone(G4),  () => playTone(C5),  () => playTone(G6)],
+		[() => playTone(E3),  () => playTone(C4),  () => playTone(E5),  () => playTone(C6),
+		 () => playTone(E3),  () => playTone(C4),  () => playTone(E5),  () => playTone(C6)]
 	]
 
 	var params = {
