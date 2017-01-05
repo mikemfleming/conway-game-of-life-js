@@ -6,6 +6,9 @@
 	/*body {
 		background-color: black;
 	}*/
+	body {
+		transition: background-color .75s
+	}
 	#container {
 		width: 100%;
 		text-align: center;
@@ -112,27 +115,27 @@
 	const B  = document.getElementById('B')
 	const C2 = document.getElementById('C2')
 	
-	var starting_cells = [
-		[0,0,0,0,0,0,0,0],
-		[0,0,1,0,0,0,0,0],
-		[1,1,1,0,0,0,0,0],
-		[0,0,1,1,1,0,0,0],
-		[0,0,1,0,1,1,1,0],
-		[0,0,1,0,0,0,0,0],
-		[0,0,1,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0]
-	];
-
 	// var starting_cells = [
-	// 	[0,1,0,0,0,0,0,1],
-	// 	[0,0,1,0,0,0,0,1],
-	// 	[1,1,1,0,0,0,0,1],
 	// 	[0,0,0,0,0,0,0,0],
-	// 	[0,0,0,0,0,0,0,0],
-	// 	[0,1,1,1,0,0,0,0],
+	// 	[0,0,1,0,0,0,0,0],
+	// 	[1,1,1,0,0,0,0,0],
+	// 	[0,0,1,1,1,0,0,0],
+	// 	[0,0,1,0,1,1,1,0],
+	// 	[0,0,1,0,0,0,0,0],
 	// 	[0,0,1,0,0,0,0,0],
 	// 	[0,0,0,0,0,0,0,0]
 	// ];
+
+	var starting_cells = [
+		[0,1,0,0,0,0,0,1],
+		[0,0,1,0,0,0,0,1],
+		[1,1,1,0,0,0,0,1],
+		[0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0],
+		[0,1,1,1,0,0,0,0],
+		[0,0,1,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0]
+	];
 
 	// detect when live cells land on each pad of this matrix
 	//
@@ -212,9 +215,16 @@
     				population++
     				matrix[y][x]()
     			}
-    			console.log(population)
+    			
     		})
     	})
+    	console.log(population)
+    	if (population <= 8) {
+    		document.body.style.backgroundColor = 'red'
+    		document.getElementById('C8').play()
+    	} else {
+    		document.body.style.backgroundColor = 'white'
+    	}
     }
 
     function interval () {
