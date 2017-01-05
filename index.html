@@ -115,27 +115,31 @@
 	const B  = document.getElementById('B')
 	const C2 = document.getElementById('C2')
 	
+	var starting_cells = [
+		[0,0,0,0,0,0,0,0],
+		[0,0,1,0,0,0,0,0],
+		[1,1,1,0,0,0,0,0],
+		[0,0,1,1,1,0,0,0],
+		[0,0,1,0,1,1,1,0],
+		[0,0,1,0,0,0,0,0],
+		[0,0,1,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0]
+	];
+
 	// var starting_cells = [
+	// 	[0,1,0,0,0,0,0,1],
+	// 	[0,0,1,0,0,0,0,1],
+	// 	[1,1,1,0,0,0,0,1],
 	// 	[0,0,0,0,0,0,0,0],
-	// 	[0,0,1,0,0,0,0,0],
-	// 	[1,1,1,0,0,0,0,0],
-	// 	[0,0,1,1,1,0,0,0],
-	// 	[0,0,1,0,1,1,1,0],
-	// 	[0,0,1,0,0,0,0,0],
+	// 	[0,0,0,0,0,0,0,0],
+	// 	[0,1,1,1,0,0,0,0],
 	// 	[0,0,1,0,0,0,0,0],
 	// 	[0,0,0,0,0,0,0,0]
 	// ];
 
-	var starting_cells = [
-		[0,1,0,0,0,0,0,1],
-		[0,0,1,0,0,0,0,1],
-		[1,1,1,0,0,0,0,1],
-		[0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0],
-		[0,1,1,1,0,0,0,0],
-		[0,0,1,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0]
-	];
+	// ideas for melody makers:
+	// - weight/momentum (zones are like keys with slow attack, the longer something is in the zone the more you hear the chord associated with the zone)
+	// - taper (adjust gain according to population)
 
 	// detect when live cells land on each pad of this matrix
 	//
