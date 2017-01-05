@@ -201,14 +201,18 @@
       init_cells:   starting_cells
     };
 
+
     var game = new GameOfLife(params);
 
     function play () {
+	    var population = 0;
     	game.getCurrentGenCells().forEach((row, y) => {
     		row.forEach((cell,x) => {
     			if (cell.state == 'alive') {
+    				population++
     				matrix[y][x]()
     			}
+    			console.log(population)
     		})
     	})
     }
