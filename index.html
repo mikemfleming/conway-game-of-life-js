@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+  <title></title>
 <style type="text/css">
-	/*body {
-		background-color: black;
-	}*/
-	#container {
-		width: 100%;
-		text-align: center;
-	}
-	canvas {
-		border: 1px solid black;
-		margin-top: 2%;
-		display: inline;
-		height: 50vh;
-	}
+  /*body {
+    background-color: black;
+  }*/
+  #container {
+    position: relative;
+    width: 100%;
+    text-align: center;
+  }
+  canvas {
+    border: 1px solid black;
+    margin-top: 2%;
+    display: inline;
+    height: 50vh;
+  }
+  button {
+    display: block;
+    position: relative;
+    margin-left: 50%;
+    left:-19px;
+  }
 </style>
 </head>
 <body>
@@ -30,95 +37,119 @@
 <audio src="./tones/c2.wav" id="C2"></audio>
 
 <div id="container">
-	<h1>SINGING GLIDER</h1>
-	<canvas id="life"></canvas>
+  <h1 id="pop">0</h1>
+  <canvas id="life"></canvas>
+  <button id="step">Step</button>
 </div>
 
 </body>
+<script type="text/javascript" src="./organismCount.js"></script>
 <script src="./gameoflife.js"></script>
 <script type="text/javascript">
 
-	const C1 = document.getElementById('C1')
-	const D  = document.getElementById('D')
-	const E  = document.getElementById('E')
-	const F  = document.getElementById('F')
-	const G  = document.getElementById('G')
-	const A  = document.getElementById('A')
-	const B  = document.getElementById('B')
-	const C2 = document.getElementById('C2')
-	
-	var starting_cells = [
-		[0,0,0,0,0,0,0,0],
-		[0,0,1,0,0,0,0,0],
-		[1,1,1,0,0,0,0,0],
-		[0,0,1,1,1,0,0,0],
-		[0,0,1,0,1,1,1,0],
-		[0,0,1,0,0,0,0,0],
-		[0,0,1,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0]
-	];
+  document.getElementById('step').addEventListener('click', interval)
 
-	// detect when live cells land on each pad of this matrix
-	//    1 2 3 4 5 6 7 8
-	// 1  C G D A E B F C
-	// 2  E B F C G D A E 
-	// 3  G D A E B F C G
-	// 4  B F C G D A E B
-	// 5  D A E B F C G D
-	// 6  F C G D A E B F
-	// 7  A E B F C G D A
-	// 8  C G D A E B F C
+  const pop_element = document.getElementById('pop')
 
-	function playTone (el) {
-		el.currentTime = 0;
-		el.play()
-	}
+  // TODO:
+  // - detect number of organisms
+  // - catalogue their shapes
+  // - activate on initial cells as well as "world"
 
-	var matrix = [
-		[() => playTone(C1), () => playTone(G),  () => playTone(D),  () => playTone(A),
-		 () => playTone(E),  () => playTone(B),  () => playTone(F),  () => playTone(C2)],
-		[() => playTone(E),  () => playTone(B),  () => playTone(F),  () => playTone(C1),
-		 () => playTone(G),  () => playTone(D),  () => playTone(A),  () => playTone(E)],
-		[() => playTone(G),  () => playTone(D),  () => playTone(A),  () => playTone(E),
-		 () => playTone(B),  () => playTone(F),  () => playTone(C2), () => playTone(G)],
-		[() => playTone(B),  () => playTone(F),  () => playTone(C1), () => playTone(G),
-		 () => playTone(D),  () => playTone(A),  () => playTone(E),  () => playTone(B)],
-		[() => playTone(D),  () => playTone(A),  () => playTone(E),  () => playTone(B),
-		 () => playTone(F),  () => playTone(C2), () => playTone(G),  () => playTone(D)],
-		[() => playTone(F),  () => playTone(C1), () => playTone(G),  () => playTone(D),
-		 () => playTone(A),  () => playTone(E),  () => playTone(B),  () => playTone(F)],
-		[() => playTone(A),  () => playTone(E),  () => playTone(B),  () => playTone(F),
-		 () => playTone(C2), () => playTone(G),  () => playTone(D),  () => playTone(A)],
-		[() => playTone(C1), () => playTone(G),  () => playTone(D),  () => playTone(A),
-		 () => playTone(E),  () => playTone(B),  () => playTone(F),  () => playTone(C2)]
-	]
 
-	var params = {
+
+
+  const C1 = document.getElementById('C1')
+  const D  = document.getElementById('D')
+  const E  = document.getElementById('E')
+  const F  = document.getElementById('F')
+  const G  = document.getElementById('G')
+  const A  = document.getElementById('A')
+  const B  = document.getElementById('B')
+  const C2 = document.getElementById('C2')
+  
+  var starting_cells = [
+    [0,0,0,0,0,0,0,0],
+    [0,0,1,0,0,0,0,0],
+    [1,1,1,0,0,0,0,0],
+    [0,0,1,1,1,0,0,0],
+    [0,0,1,0,1,1,1,0],
+    [0,0,1,0,0,0,0,0],
+    [0,0,1,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0]
+  ];
+
+  // detect when live cells land on each pad of this matrix
+  //    1 2 3 4 5 6 7 8
+  // 1  C G D A E B F C
+  // 2  E B F C G D A E 
+  // 3  G D A E B F C G
+  // 4  B F C G D A E B
+  // 5  D A E B F C G D
+  // 6  F C G D A E B F
+  // 7  A E B F C G D A
+  // 8  C G D A E B F C
+
+  function playTone (el) {
+    el.currentTime = 0;
+    el.play()
+  }
+
+  var matrix = [
+    [() => playTone(C1), () => playTone(G),  () => playTone(D),  () => playTone(A),
+     () => playTone(E),  () => playTone(B),  () => playTone(F),  () => playTone(C2)],
+    [() => playTone(E),  () => playTone(B),  () => playTone(F),  () => playTone(C1),
+     () => playTone(G),  () => playTone(D),  () => playTone(A),  () => playTone(E)],
+    [() => playTone(G),  () => playTone(D),  () => playTone(A),  () => playTone(E),
+     () => playTone(B),  () => playTone(F),  () => playTone(C2), () => playTone(G)],
+    [() => playTone(B),  () => playTone(F),  () => playTone(C1), () => playTone(G),
+     () => playTone(D),  () => playTone(A),  () => playTone(E),  () => playTone(B)],
+    [() => playTone(D),  () => playTone(A),  () => playTone(E),  () => playTone(B),
+     () => playTone(F),  () => playTone(C2), () => playTone(G),  () => playTone(D)],
+    [() => playTone(F),  () => playTone(C1), () => playTone(G),  () => playTone(D),
+     () => playTone(A),  () => playTone(E),  () => playTone(B),  () => playTone(F)],
+    [() => playTone(A),  () => playTone(E),  () => playTone(B),  () => playTone(F),
+     () => playTone(C2), () => playTone(G),  () => playTone(D),  () => playTone(A)],
+    [() => playTone(C1), () => playTone(G),  () => playTone(D),  () => playTone(A),
+     () => playTone(E),  () => playTone(B),  () => playTone(F),  () => playTone(C2)]
+  ]
+
+  var params = {
       canvas_id:    'life',
       cell_width:   100,
       cell_height:  100,
-	  colorful: false,
+    colorful: false,
       init_cells:   starting_cells
     };
 
     var game = new GameOfLife(params);
 
     function play () {
-    	game.getCurrentGenCells().forEach((row, y) => {
-    		row.forEach((cell,x) => {
-    			if (cell.state == 'alive') {
-    				matrix[y][x]()
-    			}
-    		})
-    	})
+      var world = game.getCurrentGenCells()
+      var population = countOrganisms(world)
+
+      console.log(population)
+
+      // world.forEach((row, y) => {
+      //   row.forEach((cell,x) => {
+      //     if (cell.state == 'alive') {
+      //       // matrix[y][x]()
+      //       population++
+      //     }
+      //   })
+      // })
+
+
+
+      pop_element.innerHTML = population
     }
 
     function interval () {
-    	game.step()
-    	play()
+      game.step()
+      play()
     }
 
-    var interval = setInterval(interval, 750);
+    // var interval = setInterval(interval, 2000);
 
 </script>
 </html>
